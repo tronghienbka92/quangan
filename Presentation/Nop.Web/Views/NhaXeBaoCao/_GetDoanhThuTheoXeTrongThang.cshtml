@@ -1,0 +1,53 @@
+﻿
+@model List<DoanhThuTheoThang>
+@using Nop.Core.Domain.NhaXes
+
+<table class="BangGiaVe">
+    <thead>
+        <tr>
+            <td>STT</td>
+            <td>Họ và tên</td>
+            <td>Biển số</td>
+            <td>Số ngày vận doanh</td>
+            <td>Doanh thu tổng hợp</td>
+            <td>Doanh thu hợp đồng chuyến</td>
+            <td>Tổng doanh thu</td>
+        </tr>
+    </thead>
+    <tbody>
+        @{var stt=1;}
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@stt</td>
+                <td>@item.TenLaiXe</td>
+                <td>@item.BienSoXe</td>
+                <td>@item.SoNgayVanDoanh</td>
+                <td>@item.DoanhThuHopDong</td>
+                <td>@item.DoanhThuHopDongChuyen</td>
+                <td>@item.TongDoanhThu</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<style>
+    .BangGiaVe {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        .BangGiaVe, .BangGiaVe tr, .BangGiaVe tr td {
+            border: 1px solid #928d8d;
+        }
+
+            .BangGiaVe tr {
+                height: 30px;
+            }
+
+            .BangGiaVe thead tr td {
+                font-weight: bold;
+                font-size: 16px;
+            }
+</style>

@@ -1,0 +1,188 @@
+﻿@model TKLuotKhachHangModel
+@using Nop.Web.Models.NhaXeBaoCao
+@{
+    var i = 0;
+    decimal tong1 = 0;
+}
+
+<table class="BangGiaVe">
+    <thead>
+        <tr>
+            <td rowspan="2" colspan="1">STT</td>
+            <td rowspan="2" colspan="1">Ngày đi</td>
+            <td rowspan="1" colspan="3" style="text-align:center">Đà Nẵng - Tam Kỳ</td>
+            <td rowspan="1" colspan="3" style="text-align:center">Tam Kỳ - Đà Nẵng</td>
+            <td rowspan="1" colspan="3" style="text-align:center">Đà Nẵng - Chu Lai</td>
+            <td rowspan="1" colspan="3" style="text-align:center"> Chu Lai - Đà Nẵng</td>
+            <td rowspan="2" colspan="1">Tổng</td>
+            <td rowspan="2" colspan="1">DT Hợp đồng chuyến</td>
+           
+        </tr>
+        <tr>
+           
+            <td rowspan="1" colspan="1">Số lượt</td>
+            <td rowspan="1" colspan="1"> Số lượng</td>
+            <td rowspan="1" colspan="1">Tổng doanh thu</td>
+
+            <td rowspan="1" colspan="1">Số lượt</td>
+            <td rowspan="1" colspan="1"> Số lượng</td>
+            <td rowspan="1" colspan="1">Tổng doanh thu</td>
+
+            <td rowspan="1" colspan="1">Số lượt</td>
+            <td rowspan="1" colspan="1"> Số lượng</td>
+            <td rowspan="1" colspan="1">Tổng doanh thu</td>
+
+            <td rowspan="1" colspan="1">Số lượt</td>
+            <td rowspan="1" colspan="1"> Số lượng</td>
+            <td rowspan="1" colspan="1">Tổng doanh thu</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.DoanhThuTongHops)
+        {
+            decimal tong2 = 0;
+            i++;
+            tong2 = item.DTDN_TK.ThanhTien + item.DTTK_DN.ThanhTien + item.DTDN_CL.ThanhTien + item.DTCL_DN.ThanhTien;
+            tong1 = tong1 + tong2;
+            <tr>
+                <td>
+                    @i
+                </td>
+                <td>
+                    @item.NgayDi.ToString("dd/MM/yyyy")
+                </td>
+
+                <td>
+                    @item.DTDN_TK.TongLuot
+                </td>
+                <td>
+                    @item.DTDN_TK.SoKhach
+                </td>
+                <td>
+                    @item.DTDN_TK.ThanhTien.ToString("###,###")
+                </td>
+
+                <td>
+                    @item.DTTK_DN.TongLuot
+                </td>
+                <td>
+                    @item.DTTK_DN.SoKhach
+                </td>
+                <td>
+                    @item.DTTK_DN.ThanhTien.ToString("###,###")
+                </td>
+
+                <td>
+                    @item.DTDN_CL.TongLuot
+                </td>
+                <td>
+                    @item.DTDN_CL.SoKhach
+                </td>
+                <td>
+                    @item.DTDN_CL.ThanhTien.ToString("###,###")
+                </td>  
+                
+                <td>
+                    @item.DTCL_DN.TongLuot
+                </td>
+                <td>
+                    @item.DTCL_DN.SoKhach
+                </td>
+                <td>
+                    @item.DTCL_DN.ThanhTien.ToString("###,###")
+                </td>              
+                
+                <td>
+                   
+                    @tong2.ToString("###,###")
+                   
+                
+                </td>
+                <td>
+
+                    @item.DTHopDongChuyen.ToString("###,###")
+
+
+                </td>
+            </tr>
+        }
+        <tr>
+            <td class="Tong" colspan="2">
+                Tổng:
+            </td>
+           
+            <td class="Tong" >
+              @Model.DoanhThuTongHops.Sum(c => c.DTDN_TK.TongLuot)
+            </td>
+            <td class="Tong">
+                @Model.DoanhThuTongHops.Sum(c => c.DTDN_TK.SoKhach)
+            </td>
+            <td class="Tong">
+                @Model.DoanhThuTongHops.Sum(c => c.DTDN_TK.ThanhTien).ToString("###,###")
+            </td>
+
+            <td class="Tong">
+                @Model.DoanhThuTongHops.Sum(c => c.DTTK_DN.TongLuot)
+            </td>
+            <td class="Tong">
+                @Model.DoanhThuTongHops.Sum(c => c.DTTK_DN.SoKhach)
+            </td>
+            <td class="Tong">
+                @Model.DoanhThuTongHops.Sum(c => c.DTTK_DN.ThanhTien).ToString("###,###")
+            </td>
+
+            <td class="Tong">
+                @Model.DoanhThuTongHops.Sum(c => c.DTDN_CL.TongLuot)
+            </td>
+            <td class="Tong">
+                @Model.DoanhThuTongHops.Sum(c => c.DTDN_CL.SoKhach)
+            </td>
+            <td class="Tong">
+                @Model.DoanhThuTongHops.Sum(c => c.DTDN_CL.ThanhTien).ToString("###,###")
+            </td>
+
+            <td class="Tong">
+                @Model.DoanhThuTongHops.Sum(c => c.DTCL_DN.TongLuot)
+            </td>
+            <td class="Tong">
+                @Model.DoanhThuTongHops.Sum(c => c.DTCL_DN.SoKhach)
+            </td>
+            <td class="Tong">
+                @Model.DoanhThuTongHops.Sum(c => c.DTCL_DN.ThanhTien).ToString("###,###")
+            </td>
+
+            <td class="Tong">
+                @tong1.ToString("###,###")
+            </td>
+            <td class="Tong">
+                @Model.DoanhThuTongHops.Sum(c => c.DTHopDongChuyen).ToString("###,###")
+            </td>
+           
+        </tr>
+    </tbody>
+    
+</table>
+
+<style>
+     .BangGiaVe {
+                border-collapse: collapse;                
+               width:100%;
+            }
+       .BangGiaVe, .BangGiaVe tr, .BangGiaVe tr td {
+            border: 1px solid #928d8d;
+        }
+       .BangGiaVe tr
+       {
+           height:30px;
+       }
+       .BangGiaVe thead tr td
+       {
+           font-weight: bold;
+    font-size: 15px;
+       }
+       .Tong
+       {
+           font-size:15px;
+           font-weight: bold;
+       }
+</style>
